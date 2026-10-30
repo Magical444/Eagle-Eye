@@ -1,0 +1,54 @@
+appId: com.eagleeye.app
+productName: Eagle Eye
+directories:
+  output: dist
+  buildResources: resources/installer
+
+files:
+  - out/**
+  - package.json
+  - "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}"
+  - "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}"
+  - "!**/node_modules/*.d.ts"
+  - "!**/node_modules/.bin"
+  - "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}"
+  - "!**/._*"
+  - "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}"
+  - "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}"
+  - "!**/{appveyor.yml,.travis.yml,circle.yml}"
+
+extraResources:
+  - from: python
+    to: python
+    filter: ["**/*", "!**/__pycache__/**", "!tests/**", "!.pytest_cache/**"]
+  - from: resources/runtime
+    to: runtime
+    filter: ["**/*", "!**/*.zip"] # Exclude the zip file from the build
+  - from: resources/tesseract
+    to: tesseract
+  - from: resources/ghostscript
+    to: ghostscript
+  - from: resources/language-data
+    to: language-data
+
+asarUnpack:
+  - python/**
+
+# CRITICAL FIX: This prevents the build from crashing on unsigned Python executables
+win:
+  signAndEditExecutable: false
+  target:
+    - { target: nsis, arch: [x64] }
+    - { target: portable, arch: [x64] }
+  icon: resources/icons/icon.ico
+
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  perMachine: false
+  createDesktopShortcut: true
+  shortcutName: Eagle Eye
+  artifactName: Eagle-Eye-Setup-${version}.${ext}
+
+portable:
+  artifactName: Eagle-Eye-Portable-${version}.${ext}

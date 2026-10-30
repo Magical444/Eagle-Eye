@@ -1,0 +1,11 @@
+node_modules
+out
+dist
+.venv
+__pycache__
+.pytest_cache
+resources/runtime
+resources/tesseract/*
+resources/ghostscript/*
+resources/language-data/*.traineddata
+!resources/**/.gitkeep

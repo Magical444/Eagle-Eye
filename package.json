@@ -1,0 +1,34 @@
+{
+  "name": "eagle-eye",
+  "productName": "Eagle Eye",
+  "version": "1.0.0",
+  "description": "Eagle Eye - offline document intelligence, OCR and searchable archive management",
+  "main": "./out/main/index.js",
+  "author": "Eagle Eye",
+  "private": true,
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "typecheck": "tsc --noEmit -p tsconfig.node.json && tsc --noEmit -p tsconfig.web.json",
+    "start": "electron-vite preview",
+    "test:py": "python -m pytest python/tests -q",
+    "pack": "npm run build && electron-builder --win --x64 --dir",
+    "dist": "npm run build && electron-builder --win --x64"
+  },
+  "dependencies": {
+    "lucide-react": "^0.462.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.0",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.3",
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8",
+    "electron-vite": "^2.3.0",
+    "typescript": "^5.6.3",
+    "vite": "^5.4.11"
+  }
+}
